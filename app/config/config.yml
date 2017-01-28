@@ -39,6 +39,19 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
+assetic:
+    use_controller: false
+    bundles:        [ ]
+    debug:          '%kernel.debug%'
+    filters:
+        less:
+            node: /usr/bin/node
+            node_paths: [/usr/local/lib/node_modules]
+            apply_to: "\\.less$"
+        cssrewrite: ~
+braincrafted_bootstrap:
+    css_preprocessor: less
+
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -68,3 +81,12 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+fos_rest:
+    routing_loader:
+            default_format: json
+    format_listener:
+        rules:
+            - { path: ^/?, stop: true }
+    serializer:
+        serialize_null: true

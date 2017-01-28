@@ -13,6 +13,10 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Type;
 
 class TemperatureConverterNewType extends AbstractType
 {
@@ -21,22 +25,43 @@ class TemperatureConverterNewType extends AbstractType
         $builder
             ->add('temperatureValue', NumberType::class, array(
                 'label' => 'Wartość temperatury',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'To pole nie może być puste!'
+                    ]),
+                ],
+                'invalid_message' => 'Wprowadzona wartość nie jest numeryczna!',
             ))
-            ->add('initValue', ChoiceType::class, array(
+            ->add('initType', ChoiceType::class, array(
                 'placeholder' => false,
                 'choices' => array('Celcjusz' => 'c', 'Fahrenheit' => 'f', 'Kelwin' => 'k'),
-                'mapped'    => false,
                 'label' => 'Typ temperatury wejściowej',
+                'constraints' => [
+                    new NotNull([
+                        'message' => 'Proszę wybrać typ wartości wejściowej!'
+                    ])
+                ],
             ))
-            ->add('destValue', ChoiceType::class, array(
+            ->add('destType', ChoiceType::class, array(
                 'placeholder' => false,
                 'choices' => array('Celcjusz' => 'c', 'Fahrenheit' => 'f', 'Kelwin' => 'k'),
-                'mapped'    => false,
                 'label' => 'Typ temperatury wyjściowej',
+                'constraints' => [
+                    new NotNull([
+                        'message' => 'Proszę wybrać typ wartości wyjściowej!'
+                    ])
+                ],
             ))
             ->add('submit', SubmitType::class, array(
                 'label' => 'Przelicz',
             ))
         ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'allow_extra_fields' => true,
+        ));
     }
 }
