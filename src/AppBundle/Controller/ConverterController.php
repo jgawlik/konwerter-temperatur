@@ -18,7 +18,7 @@ class ConverterController extends Controller
     /**
      * @Route("/", name="converter")
      */
-    public function indexAction(Request $request)
+    public function converterFormAction(Request $request)
     {
         $temperature = new Temperature();
         $form = $this->createForm(TemperatureConverterNewType::class, $temperature);

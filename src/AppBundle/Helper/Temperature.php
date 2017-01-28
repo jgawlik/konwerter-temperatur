@@ -11,6 +11,10 @@ namespace AppBundle\Helper;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
+/**
+ * Class Temperature
+ * @package AppBundle\Helper
+ */
 class Temperature
 {
     /** @var  float */
@@ -70,33 +74,55 @@ class Temperature
         $this->destType = $destType;
     }
 
-
-
+    /**
+     * @param $temperatureValue
+     * @return float
+     */
     public function changeCentigradeToFarenheit($temperatureValue)
     {
         return 9/5 * $temperatureValue + 32;
     }
 
+    /**
+     * @param $temperatureValue
+     * @return mixed
+     */
     public function changeCentigradeToKelvin($temperatureValue)
     {
         return $temperatureValue + 273.15;
     }
 
+    /**
+     * @param $temperatureValue
+     * @return float
+     */
     public function changeFahrenheitToKelvin($temperatureValue)
     {
         return ($temperatureValue+459.67)*5/9;
     }
 
+    /**
+     * @param $temperatureValue
+     * @return float
+     */
     public function changeFahrenheitToCentigrade($temperatureValue)
     {
         return 5/9 * ( $temperatureValue - 32 );
     }
 
+    /**
+     * @param $temperatureValue
+     * @return float
+     */
     public function changeKelvinToFahrenheit($temperatureValue)
     {
         return $temperatureValue * 9/5-459.67;
     }
 
+    /**
+     * @param $temperatureValue
+     * @return mixed
+     */
     public function changeKelvinToCentigrade($temperatureValue)
     {
         return $temperatureValue  - 273.15;

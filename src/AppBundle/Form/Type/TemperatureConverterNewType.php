@@ -62,6 +62,15 @@ class TemperatureConverterNewType extends AbstractType
     {
         $resolver->setDefaults(array(
             'allow_extra_fields' => true,
+            'data_class'    => 'AppBundle\Helper\Temperature',
         ));
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'temperatureConverter';
     }
 }
