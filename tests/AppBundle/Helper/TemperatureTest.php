@@ -6,9 +6,9 @@
  * Date: 28.01.17
  * Time: 11:51
  */
-class TemperatureTest extends PHPUnit_Framework_TestCase
+class TemperatureTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var  \AppBundle\Helper\Temperature */
+    /** @var  \App\Helper\Temperature */
     private $entity;
 
     /**
@@ -16,7 +16,7 @@ class TemperatureTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->entity = new \AppBundle\Helper\Temperature();
+        $this->entity = new \App\Helper\Temperature();
     }
 
     /**

@@ -6,10 +6,10 @@
  * Date: 28.01.17
  * Time: 13:27
  */
-namespace Tests\AppBundle\Form\Type;
+namespace Tests\App\Form\Type;
 
-use AppBundle\Form\Type\TemperatureConverterNewType;
-use AppBundle\Helper\Temperature;
+use App\Form\Type\TemperatureConverterNewType;
+use App\Helper\Temperature;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
