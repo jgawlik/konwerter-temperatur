@@ -25,7 +25,8 @@
         "symfony/yaml": "^4.0"
     },
     "require-dev": {
-        "symfony/dotenv": "^4.0"
+        "symfony/dotenv": "^4.0",
+        "symfony/phpunit-bridge": "^4.0"
     },
     "config": {
         "preferred-install": {
@@ -66,7 +67,7 @@
     },
     "extra": {
         "symfony": {
-            "id": "",
+            "id": "01C4Z9VEGGTB89EJ3YP9ZNMEM0",
             "allow-contrib": false
         },
         "symfony.id": "01C4Z3VB25MZNRF9Y0Z2WQ4T76"

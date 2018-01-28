@@ -6,7 +6,8 @@
  * Date: 28.01.17
  * Time: 13:27
  */
-namespace Tests\App\Form\Type;
+
+namespace App\Tests\Form\Type;
 
 use App\Form\Type\TemperatureConverterNewType;
 use App\Helper\Temperature;

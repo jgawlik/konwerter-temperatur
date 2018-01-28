@@ -6,7 +6,12 @@
  * Date: 28.01.17
  * Time: 11:51
  */
-class TemperatureTest extends \PHPUnit\Framework\TestCase
+
+namespace App\Tests\Helper;
+
+use PHPUnit\Framework\TestCase;
+
+class TemperatureTest extends TestCase
 {
     /** @var  \App\Helper\Temperature */
     private $entity;
