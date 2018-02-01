@@ -10,7 +10,7 @@
 namespace App\Tests\Form\Type;
 
 use App\Form\Type\TemperatureConverterNewType;
-use App\Helper\Temperature;
+use App\Form\Model\Temperature;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Mapping\ClassMetadata;

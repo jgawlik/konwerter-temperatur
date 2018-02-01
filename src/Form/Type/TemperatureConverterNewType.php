@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: justyna
- * Date: 26.01.17
- * Time: 21:47
- */
 
 namespace App\Form\Type;
 
+use App\Form\Model\Temperature;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -16,7 +11,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
-use Symfony\Component\Validator\Constraints\Type;
 
 class TemperatureConverterNewType extends AbstractType
 {
@@ -32,9 +26,13 @@ class TemperatureConverterNewType extends AbstractType
                 ],
                 'invalid_message' => 'Wprowadzona wartość nie jest numeryczna!',
             ))
-            ->add('initType', ChoiceType::class, array(
+            ->add('initialTemperatureUnit', ChoiceType::class, array(
                 'placeholder' => false,
-                'choices' => array('Celcjusz' => 'c', 'Fahrenheit' => 'f', 'Kelwin' => 'k'),
+                'choices' => [
+                    'Celcjusz' => Temperature::CENTIGRADE_UNIT,
+                    'Fahrenheit' => Temperature::FAHRENHEIT_UNIT,
+                    'Kelwin' => Temperature::KELVIN_UNIT,
+                ],
                 'label' => 'Typ temperatury wejściowej',
                 'constraints' => [
                     new NotNull([
@@ -42,9 +40,13 @@ class TemperatureConverterNewType extends AbstractType
                     ])
                 ],
             ))
-            ->add('destType', ChoiceType::class, array(
+            ->add('destinationTemperatureUnit', ChoiceType::class, array(
                 'placeholder' => false,
-                'choices' => array('Celcjusz' => 'c', 'Fahrenheit' => 'f', 'Kelwin' => 'k'),
+                'choices' => [
+                    'Celcjusz' => Temperature::CENTIGRADE_UNIT,
+                    'Fahrenheit' => Temperature::FAHRENHEIT_UNIT,
+                    'Kelwin' => Temperature::KELVIN_UNIT,
+                ],
                 'label' => 'Typ temperatury wyjściowej',
                 'constraints' => [
                     new NotNull([
@@ -54,15 +56,14 @@ class TemperatureConverterNewType extends AbstractType
             ))
             ->add('submit', SubmitType::class, array(
                 'label' => 'Przelicz',
-            ))
-        ;
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'allow_extra_fields' => true,
-            'data_class'    => 'App\Helper\Temperature',
+            'data_class' => Temperature::class,
         ));
     }
 

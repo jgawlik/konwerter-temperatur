@@ -4,14 +4,10 @@ namespace App\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use App\Form\Type\TemperatureConverterNewType;
-use App\Helper\Temperature;
+use App\Form\Model\Temperature;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * Class ConverterController
- * @package App\Controller
- */
 class ConverterController extends Controller
 {
 
