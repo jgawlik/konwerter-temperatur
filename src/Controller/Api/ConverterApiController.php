@@ -1,16 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: justyna
- * Date: 27.01.17
- * Time: 23:51
- */
 
 namespace App\Controller\Api;
 
-
 use App\Form\Type\TemperatureConverterNewType;
-use App\Helper\Temperature;
+use App\Form\Model\Temperature;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -29,7 +22,6 @@ class ConverterApiController extends FOSRestController
      * @Route("/post-converter", name="api_converter_post")
      * @Method("POST")
      */
-
     public function processForm(Request $request)
     {
         $temperature = new Temperature();
@@ -51,7 +43,6 @@ class ConverterApiController extends FOSRestController
      * @Route("/get-converter", name="api_converter_get")
      * @Method("GET")
      */
-
     public function getForm(Request $request)
     {
         $temperature = new Temperature();

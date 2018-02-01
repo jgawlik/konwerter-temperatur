@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\UnitConverterService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use App\Form\Type\TemperatureConverterNewType;
 use App\Form\Model\Temperature;
@@ -10,6 +11,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ConverterController extends Controller
 {
+    private $unitConverterService;
+
+    public function __construct(UnitConverterService $unitConverterService)
+    {
+        $this->unitConverterService = $unitConverterService;
+    }
 
     /**
      * @Route("/", name="converter")
@@ -19,11 +26,10 @@ class ConverterController extends Controller
         $temperature = new Temperature();
         $form = $this->createForm(TemperatureConverterNewType::class, $temperature);
         $form ->handleRequest($request);
-        $convManager = $this->get('converter.manager');
-        if ($form->isSubmitted() == true and $form->isValid() == true) {
+        if ($form->isSubmitted() && $form->isValid()) {
             return $this->render('default/afterValidSubmit.html.twig', [
                 'form' => $form->createView(),
-                'newTemp'   => $convManager->getNewValueTemp($form->getData()),
+                'newTemp'   => $this->unitConverterService->convertTemperature($form->getData()),
             ]);
         }
 
