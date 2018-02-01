@@ -1,24 +1,34 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-offset-4 col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Konwerter temperatur</h3>
-                </div>
-                <div class="panel-body">
-                    {{ form_start(form) }}
-                    {{ form_rest(form) }}
-                    {{ form_errors(form) }}
-                    {{ form_end(form) }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-offset-4 col-md-4">
 
-                    {% block afterValidSubmit %}
-                    {% endblock %}
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }}">
+                            <a href="#" class="close" data-dismiss="alert" title="close">×</a>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Konwerter temperatur</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{ form_start(form) }}
+                        {{ form_rest(form) }}
+                        {{ form_errors(form) }}
+                        {{ form_end(form) }}
+
+                        {% block afterValidSubmit %}
+                        {% endblock %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

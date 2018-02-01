@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Exception\InvalidTemperatureUnitException;
 use App\Service\UnitConverterService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use App\Form\Type\TemperatureConverterNewType;
@@ -23,14 +24,25 @@ class ConverterController extends Controller
      */
     public function converterFormAction(Request $request)
     {
+
         $temperature = new Temperature();
         $form = $this->createForm(TemperatureConverterNewType::class, $temperature);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->render('default/afterValidSubmit.html.twig', [
-                'form' => $form->createView(),
-                'newTemperature' => $this->unitConverterService->convertTemperature($form->getData()),
-            ]);
+            try {
+                return $this->render('default/afterValidSubmit.html.twig', [
+                    'form' => $form->createView(),
+                    'newTemperature' => $this->unitConverterService->convertTemperature($form->getData()),
+                ]);
+            } catch (InvalidTemperatureUnitException $invalidTemperatureUnitException) {
+                $this->addFlash(
+                    'danger',
+                    $invalidTemperatureUnitException->getMessage()
+                );
+                return $this->render('default/index.html.twig', [
+                    'form' => $form->createView(),
+                ]);
+            }
         }
 
         return $this->render('default/index.html.twig', [
