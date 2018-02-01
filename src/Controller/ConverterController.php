@@ -25,11 +25,11 @@ class ConverterController extends Controller
     {
         $temperature = new Temperature();
         $form = $this->createForm(TemperatureConverterNewType::class, $temperature);
-        $form ->handleRequest($request);
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             return $this->render('default/afterValidSubmit.html.twig', [
                 'form' => $form->createView(),
-                'newTemp'   => $this->unitConverterService->convertTemperature($form->getData()),
+                'newTemperature' => $this->unitConverterService->convertTemperature($form->getData()),
             ]);
         }
 

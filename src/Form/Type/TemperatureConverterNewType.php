@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints\NotNull;
 class TemperatureConverterNewType extends AbstractType
 {
     private const TEMPERATURE_CHOICES =  [
-        'Celcjusz' => Temperature::CENTIGRADE_UNIT,
+        'Celsjusz' => Temperature::CENTIGRADE_UNIT,
         'Fahrenheit' => Temperature::FAHRENHEIT_UNIT,
         'Kelwin' => Temperature::KELVIN_UNIT,
     ];

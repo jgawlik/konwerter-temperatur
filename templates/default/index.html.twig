@@ -13,6 +13,9 @@
                     {{ form_rest(form) }}
                     {{ form_errors(form) }}
                     {{ form_end(form) }}
+
+                    {% block afterValidSubmit %}
+                    {% endblock %}
                 </div>
             </div>
         </div>
