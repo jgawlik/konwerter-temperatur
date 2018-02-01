@@ -14,6 +14,12 @@ use Symfony\Component\Validator\Constraints\NotNull;
 
 class TemperatureConverterNewType extends AbstractType
 {
+    private const TEMPERATURE_CHOICES =  [
+        'Celcjusz' => Temperature::CENTIGRADE_UNIT,
+        'Fahrenheit' => Temperature::FAHRENHEIT_UNIT,
+        'Kelwin' => Temperature::KELVIN_UNIT,
+    ];
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -28,11 +34,7 @@ class TemperatureConverterNewType extends AbstractType
             ))
             ->add('initialTemperatureUnit', ChoiceType::class, array(
                 'placeholder' => false,
-                'choices' => [
-                    'Celcjusz' => Temperature::CENTIGRADE_UNIT,
-                    'Fahrenheit' => Temperature::FAHRENHEIT_UNIT,
-                    'Kelwin' => Temperature::KELVIN_UNIT,
-                ],
+                'choices' => self::TEMPERATURE_CHOICES,
                 'label' => 'Typ temperatury wejściowej',
                 'constraints' => [
                     new NotNull([
@@ -42,11 +44,7 @@ class TemperatureConverterNewType extends AbstractType
             ))
             ->add('destinationTemperatureUnit', ChoiceType::class, array(
                 'placeholder' => false,
-                'choices' => [
-                    'Celcjusz' => Temperature::CENTIGRADE_UNIT,
-                    'Fahrenheit' => Temperature::FAHRENHEIT_UNIT,
-                    'Kelwin' => Temperature::KELVIN_UNIT,
-                ],
+                'choices' => self::TEMPERATURE_CHOICES,
                 'label' => 'Typ temperatury wyjściowej',
                 'constraints' => [
                     new NotNull([
