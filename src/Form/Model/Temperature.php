@@ -52,15 +52,15 @@ class Temperature
     {
         if ($this->destinationTemperatureUnit === $this->initialTemperatureUnit) {
             $context->buildViolation('Typ wyjściowy i docelowy nie może być taki sam!')
-                ->atPath('initType')
-                ->atPath('destType')
+                ->atPath('initialTemperatureUnit')
+                ->atPath('destinationTemperatureUnit')
                 ->addViolation();
         }
         if ($this->destinationTemperatureUnit == self::KELVIN_UNIT
             && $this->initialTemperatureUnit == self::CENTIGRADE_UNIT
             && $this->temperatureValue < -273.15) {
             $context->buildViolation('Temperatura wyjściowa w kelwinach będzie mniejsza od 0!')
-                ->atPath('destType')
+                ->atPath('destinationTemperatureUnit')
                 ->addViolation();
         }
         if ($this->initialTemperatureUnit == self::KELVIN_UNIT && $this->temperatureValue < 0) {
