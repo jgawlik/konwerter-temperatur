@@ -24,7 +24,6 @@ class ConverterController extends Controller
      */
     public function converterFormAction(Request $request)
     {
-
         $temperature = new Temperature();
         $form = $this->createForm(TemperatureConverterNewType::class, $temperature);
         $form->handleRequest($request);
@@ -39,9 +38,6 @@ class ConverterController extends Controller
                     'danger',
                     $invalidTemperatureUnitException->getMessage()
                 );
-                return $this->render('default/index.html.twig', [
-                    'form' => $form->createView(),
-                ]);
             }
         }
 
