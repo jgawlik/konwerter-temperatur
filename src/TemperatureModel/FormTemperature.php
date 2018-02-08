@@ -1,48 +1,33 @@
 <?php
 
-namespace App\Form\Model;
+namespace App\TemperatureModel;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-class Temperature
+class FormTemperature extends AbstractTemperature implements TemperatureFormInterface
 {
-    const CENTIGRADE_UNIT = 'Centigrade';
-    const KELVIN_UNIT = 'Kelvin';
-    const FAHRENHEIT_UNIT = 'Fahrenheit';
 
-    private $temperatureValue;
-    private $initialTemperatureUnit;
-    private $destinationTemperatureUnit;
-
-    public function getTemperatureValue(): ?float
-    {
-        return $this->temperatureValue;
-    }
-
-    public function setTemperatureValue(?float $temperatureValue)
+    public function setTemperatureValue(?float $temperatureValue): TemperatureInterface
     {
         $this->temperatureValue = $temperatureValue;
+
+        return $this;
     }
 
-    public function getInitialTemperatureUnit(): ?string
-    {
-        return $this->initialTemperatureUnit;
-    }
 
-    public function setInitialTemperatureUnit(?string $initialTemperatureUnit)
+    public function setInitialTemperatureUnit(?string $initialTemperatureUnit): TemperatureInterface
     {
         $this->initialTemperatureUnit = $initialTemperatureUnit;
+
+        return $this;
     }
 
-    public function getDestinationTemperatureUnit(): ?string
-    {
-        return $this->destinationTemperatureUnit;
-    }
-
-    public function setDestinationTemperatureUnit(?string $destinationTemperatureUnit)
+    public function setDestinationTemperatureUnit(?string $destinationTemperatureUnit): TemperatureInterface
     {
         $this->destinationTemperatureUnit = $destinationTemperatureUnit;
+
+        return $this;
     }
 
     /**
