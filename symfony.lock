@@ -26,15 +26,6 @@
     "doctrine/lexer": {
         "version": "v1.0.1"
     },
-    "friendsofsymfony/rest-bundle": {
-        "version": "2.2",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "2.2",
-            "ref": "258300d52be6ad59b32a888d5ddafbf9638540ff"
-        }
-    },
     "jms/metadata": {
         "version": "1.6.0"
     },
@@ -185,12 +176,6 @@
             "ref": "cda8b550123383d25827705d05a42acf6819fe4e"
         }
     },
-    "symfony/security-core": {
-        "version": "v4.0.3"
-    },
-    "symfony/templating": {
-        "version": "v4.0.3"
-    },
     "symfony/translation": {
         "version": "3.3",
         "recipe": {
@@ -229,11 +214,5 @@
     },
     "twig/twig": {
         "version": "v2.4.4"
-    },
-    "willdurand/jsonp-callback-validator": {
-        "version": "v1.1.0"
-    },
-    "willdurand/negotiation": {
-        "version": "v2.3.1"
     }
 }
