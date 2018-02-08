@@ -6,11 +6,13 @@ use App\Exception\InvalidTemperatureUnitException;
 use App\Exception\TemperatureBelowZeroException;
 use App\TemperatureModel\Temperature;
 use App\Service\UnitConverterService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Rest\Route("/api/v1")
+ * @Route("/api/v1")
  */
 class ConverterApiController extends Controller
 {
@@ -22,7 +24,8 @@ class ConverterApiController extends Controller
     }
 
     /**
-     * @Rest\Get("/convert_temperature/{initialTemperatureUnit}/{destinationTemperatureUnit}/{temperatureValue}")
+     * @Route("/convert_temperature/{initialTemperatureUnit}/{destinationTemperatureUnit}/{temperatureValue}")
+     * @Method({"GET"})
      */
     public function processForm(
         string $initialTemperatureUnit,
