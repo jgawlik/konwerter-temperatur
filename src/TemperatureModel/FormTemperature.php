@@ -8,22 +8,21 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class FormTemperature extends AbstractTemperature implements TemperatureFormInterface
 {
 
-    public function setTemperatureValue(?float $temperatureValue): TemperatureInterface
+    public function setTemperatureValue(?float $temperatureValue): TemperatureFormInterface
     {
         $this->temperatureValue = $temperatureValue;
 
         return $this;
     }
 
-
-    public function setInitialTemperatureUnit(?string $initialTemperatureUnit): TemperatureInterface
+    public function setInitialTemperatureUnit(?string $initialTemperatureUnit): TemperatureFormInterface
     {
         $this->initialTemperatureUnit = $initialTemperatureUnit;
 
         return $this;
     }
 
-    public function setDestinationTemperatureUnit(?string $destinationTemperatureUnit): TemperatureInterface
+    public function setDestinationTemperatureUnit(?string $destinationTemperatureUnit): TemperatureFormInterface
     {
         $this->destinationTemperatureUnit = $destinationTemperatureUnit;
 
