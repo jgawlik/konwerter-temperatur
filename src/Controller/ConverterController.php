@@ -4,9 +4,9 @@ namespace App\Controller;
 
 use App\Exception\InvalidTemperatureUnitException;
 use App\Service\UnitConverterService;
+use App\TemperatureModel\FormTemperature;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use App\Form\Type\TemperatureConverterNewType;
-use App\Form\Model\Temperature;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -24,7 +24,7 @@ class ConverterController extends Controller
      */
     public function converterFormAction(Request $request)
     {
-        $temperature = new Temperature();
+        $temperature = new FormTemperature();
         $form = $this->createForm(TemperatureConverterNewType::class, $temperature);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

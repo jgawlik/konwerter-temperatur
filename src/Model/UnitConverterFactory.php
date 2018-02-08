@@ -3,7 +3,7 @@
 namespace App\Model;
 
 use App\Exception\InvalidTemperatureUnitException;
-use App\Form\Model\Temperature;
+use App\TemperatureModel\TemperatureInterface;
 
 class UnitConverterFactory
 {
@@ -13,7 +13,7 @@ class UnitConverterFactory
         'Kelvin' => KelvinUnitConverter::class,
     ];
 
-    public function getUnitConverter(Temperature $temperature): UnitConverterInterface
+    public function getUnitConverter(TemperatureInterface $temperature): UnitConverterInterface
     {
         if (!array_key_exists($temperature->getInitialTemperatureUnit(), self::TEMPERATURE_UNIT_TYPES)) {
             throw new InvalidTemperatureUnitException();

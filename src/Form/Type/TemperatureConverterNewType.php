@@ -2,7 +2,7 @@
 
 namespace App\Form\Type;
 
-use App\Form\Model\Temperature;
+use App\TemperatureModel\TemperatureFormInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -15,9 +15,9 @@ use Symfony\Component\Validator\Constraints\NotNull;
 class TemperatureConverterNewType extends AbstractType
 {
     private const TEMPERATURE_CHOICES =  [
-        'Celsjusz' => Temperature::CENTIGRADE_UNIT,
-        'Fahrenheit' => Temperature::FAHRENHEIT_UNIT,
-        'Kelwin' => Temperature::KELVIN_UNIT,
+        'Celsjusz' => TemperatureFormInterface::CENTIGRADE_UNIT,
+        'Fahrenheit' => TemperatureFormInterface::FAHRENHEIT_UNIT,
+        'Kelwin' => TemperatureFormInterface::KELVIN_UNIT,
     ];
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -61,7 +61,7 @@ class TemperatureConverterNewType extends AbstractType
     {
         $resolver->setDefaults(array(
             'allow_extra_fields' => true,
-            'data_class' => Temperature::class,
+            'data_class' => TemperatureFormInterface::class,
         ));
     }
 

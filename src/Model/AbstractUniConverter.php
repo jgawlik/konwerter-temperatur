@@ -3,13 +3,13 @@
 namespace App\Model;
 
 use App\Exception\InvalidTemperatureUnitException;
-use App\Form\Model\Temperature;
+use App\TemperatureModel\TemperatureInterface;
 
 abstract class AbstractUniConverter implements UnitConverterInterface
 {
     protected $temperature;
 
-    public function __construct(Temperature $temperature)
+    public function __construct(TemperatureInterface $temperature)
     {
         $this->temperature = $temperature;
     }
@@ -17,11 +17,11 @@ abstract class AbstractUniConverter implements UnitConverterInterface
     public function convertBasedOnDestinationTemperatureUnit(): float
     {
         switch ($this->temperature->getDestinationTemperatureUnit()) {
-            case Temperature::CENTIGRADE_UNIT:
+            case TemperatureInterface::CENTIGRADE_UNIT:
                 return $this->convertToCentigrade();
-            case Temperature::FAHRENHEIT_UNIT:
+            case TemperatureInterface::FAHRENHEIT_UNIT:
                 return $this->convertToFahrenheit();
-            case Temperature::KELVIN_UNIT:
+            case TemperatureInterface::KELVIN_UNIT:
                 return $this->convertToKelvin();
         }
         throw new InvalidTemperatureUnitException();

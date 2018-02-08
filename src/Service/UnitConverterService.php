@@ -2,12 +2,12 @@
 
 namespace App\Service;
 
-use App\Form\Model\Temperature;
 use App\Model\UnitConverterFactory;
+use App\TemperatureModel\TemperatureInterface;
 
 class UnitConverterService
 {
-    public function convertTemperature(Temperature $temperature): float
+    public function convertTemperature(TemperatureInterface $temperature): float
     {
         $unitConverter = (new UnitConverterFactory())->getUnitConverter($temperature);
 
