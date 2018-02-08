@@ -2,55 +2,47 @@
 
 namespace App\Controller\Api;
 
-use App\Form\Type\TemperatureConverterNewType;
-use App\Form\Model\Temperature;
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\View\View;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
-use FOS\RestBundle\Controller\Annotations as Rest;
+use App\Exception\InvalidTemperatureUnitException;
+use App\Exception\TemperatureBelowZeroException;
+use App\TemperatureModel\Temperature;
+use App\Service\UnitConverterService;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Rest\Route("/api")
+ * @Rest\Route("/api/v1")
  */
-class ConverterApiController extends FOSRestController
+class ConverterApiController extends Controller
 {
+    private $unitConverterService;
 
-    /**
-     * @Route("/post-converter", name="api_converter_post")
-     * @Method("POST")
-     */
-    public function processForm(Request $request)
+    public function __construct(UnitConverterService $unitConverterService)
     {
-        $temperature = new Temperature();
-        $form = $this->createForm(TemperatureConverterNewType::class, $temperature, ['action' => $this->generateUrl('api_converter_post')]);
-        $form->handleRequest($request);
-        $convManager = $this->get('converter.manager');
-        if ($form->isSubmitted() == true and $form->isValid() == true) {
-            $data =  array('newTemp' => $convManager->getNewValueTemp($form->getData()));
-
-            return new Response(json_encode($data), 200);
-        }
-        $view = View::create($form);
-        $view->setTemplate('default/index.html.twig');
-
-        return $this->get('fos_rest.view_handler')->handle($view);
+        $this->unitConverterService = $unitConverterService;
     }
 
     /**
-     * @Route("/get-converter", name="api_converter_get")
-     * @Method("GET")
+     * @Rest\Get("/convert_temperature/{initialTemperatureUnit}/{destinationTemperatureUnit}/{temperatureValue}")
      */
-    public function getForm(Request $request)
-    {
-        $temperature = new Temperature();
-        $form = $this->createForm(TemperatureConverterNewType::class, $temperature, ['action' => $this->generateUrl('api_converter_post')]);
-        $form->handleRequest($request);
-        $view = View::create($form);
-        $view->setTemplate('default/index.html.twig');
+    public function processForm(
+        string $initialTemperatureUnit,
+        string $destinationTemperatureUnit,
+        float $temperatureValue
+    ) {
+        try {
+            $temperature = new Temperature($initialTemperatureUnit, $destinationTemperatureUnit, $temperatureValue);
+        } catch (TemperatureBelowZeroException $exception) {
+            return $this->json(['errors' => ['message' => $exception->getMessage()]], $exception->getCode());
+        } catch (InvalidTemperatureUnitException $exception) {
+            return $this->json(['errors' => ['message' => $exception->getMessage()]], $exception->getCode());
+        }
 
-        return $this->get('fos_rest.view_handler')->handle($view);
+        try {
+            $newTemperature = $this->unitConverterService->convertTemperature($temperature);
+        } catch (InvalidTemperatureUnitException $exception) {
+            return $this->json(['errors' => ['message' => $exception->getMessage()]], $exception->getCode());
+        }
+
+        return $this->json(['convertedTemperature' => $newTemperature], Response::HTTP_OK);
     }
 }
